@@ -27,11 +27,16 @@ const CONNECTION = process.env.MONGODB_CONNECTION;
 mongoose
   .connect(CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
-    app.listen(process.env.PORT, () => console.log(`Server is running`))
+    app.listen(process.env.PORT, () =>
+      console.log(`Server is running on ${PORT}`)
+    )
   )
   .catch((error) => console.log(error));
 
 //use of routes
+app.use("/", (req, res) => {
+  res.status(200).json(`Hello World the server is running in port${PORT}`);
+});
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
 app.use("/post", PostRoute);
