@@ -35,7 +35,7 @@ mongoose
 
 //use of routes
 app.use("/", (req, res) => {
-  res.status(200).json(`The server is running in port${PORT}`);
+  res.status(200).json(`Hello World the server is running in port${PORT}`);
 });
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
