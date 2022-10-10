@@ -6,31 +6,43 @@ export const createChat = async (req, res) => {
   });
 
   try {
-    const result= await newChat.save()
-    res.status(200).json(result)
+    const result = await newChat.save();
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
 export const userChat = async (req, res) => {
-    try {
-       const chat = await ChatModel.find({
-        members: {$in: [req.params.userId]}
-       })
-       res.status(200).json(chat) 
-    } catch (error) {
-        res.status(500).json(error); 
-    }
+  try {
+    const chat = await ChatModel.find({
+      members: { $in: [req.params.userId] },
+    });
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 export const findChat = async (req, res) => {
-    try {
-        const chat = await ChatModel.findOne({
-            members: {$all: [req.params.firstId, req.params.secondId]}
-        })
-        res.status(200).json(chat)
-    } catch (error) {
-        res.status(500).json(error);
-    }
+  try {
+    const chat = await ChatModel.findOne({
+      members: { $all: [req.params.firstId, req.params.secondId] },
+    });
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// Delete all user chat
+export const deleteChat = async (req, res) => {
+  try {
+    const chat = await ChatModel.deleteMany({
+      members: { $in: [req.params.id] },
+    });
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
