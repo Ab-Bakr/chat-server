@@ -34,9 +34,7 @@ mongoose
   .catch((error) => console.log(error));
 
 //use of routes
-app.use("/", (req, res) => {
-  res.status(200).json(`Hello World the server is running in port${PORT}`);
-});
+
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
 app.use("/post", PostRoute);
